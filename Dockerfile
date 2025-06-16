@@ -1,4 +1,4 @@
-FROM go:latest
+FROM golang:alpine AS builder
 
 WORKDIR /app
 
@@ -8,4 +8,6 @@ RUN go mod download
 COPY *.go ./
 RUN go build -o kustomize-job-name-generator .
 
-ENTRYPOINT ["/app/kustomize-job-name-generator"]
+FROM alpine:latest
+COPY --from=builder /app/kustomize-job-name-generator /kustomize-job-name-generator
+ENTRYPOINT ["/kustomize-job-name-generator"]
