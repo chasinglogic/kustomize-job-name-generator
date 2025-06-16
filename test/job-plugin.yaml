@@ -1,0 +1,10 @@
+apiVersion: kustomize.example.com/v1
+kind: JobNameGenerator
+metadata:
+  name: schema-migrate
+  annotations:
+    config.kubernetes.io/function: |
+      exec:
+        path: ./test.sh
+spec:
+  resourcePath: ./job.yaml

@@ -1,0 +1,31 @@
+apiVersion: config.kubernetes.io/v1
+kind: ResourceList
+items:
+- apiVersion: kustomize.example.com/v1
+  kind: JobNameGenerator
+  metadata:
+    annotations:
+      config.kubernetes.io/function: |
+        exec:
+          path: ./test.sh
+      config.kubernetes.io/local-config: 'true'
+      config.kubernetes.io/index: '0'
+      internal.config.kubernetes.io/index: '0'
+      internal.config.kubernetes.io/annotations-migration-resource-id: '0'
+      internal.config.kubernetes.io/id: '1'
+      config.k8s.io/id: '1'
+    name: schema-migrate
+  spec:
+    resourcePath: ./job.yaml
+functionConfig:
+  apiVersion: kustomize.example.com/v1
+  kind: JobNameGenerator
+  metadata:
+    annotations:
+      config.kubernetes.io/function: |
+        exec:
+          path: ./test.sh
+      config.kubernetes.io/local-config: 'true'
+    name: schema-migrate
+  spec:
+    resourcePath: ./job.yaml
